@@ -11,6 +11,7 @@ routes.get('/',(req,res)=>{
 routes.get('/products',productsController.index);
 routes.get('/products/:id',productsController.show);
 routes.post('/products',productsController.create);
+routes.delete('/products/:id',productsController.remove);
 
 
 export default routes;

@@ -34,14 +34,29 @@ export default class ProductsController{
     }
     async show(req:Request,res:Response){
         const {id} = req.params;
-        const products = await db('products').where('id',id).first();
+        const product = await db('products').where('id',id).first();
 
-        if(!products){
+        if(!product){
             return res.status(400).json({
                 message:"Error finding product"
             })
         }
-        return res.json(products);
+        return res.json(product);
+    }
+
+    async remove(req:Request,res:Response){
+        const {id} = req.params;
+
+        const removeProduct = await db('products').where('id',id).delete()
+        if(!removeProduct){
+            return res.status(400).json({
+                message:"Unable to find product"
+            })
+        }
+        return res.json({
+            message:"Removed product:",
+            removeProduct
+        });
     }
     
 }
