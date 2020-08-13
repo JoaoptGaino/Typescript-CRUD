@@ -58,5 +58,15 @@ export default class ProductsController{
             removeProduct
         });
     }
+    async update(req:Request,res:Response){
+        const {id} = req.params;
+        const {name,price} = req.body;
+        const updatedProduct = await db('products').where('id',id).update({name,price});
+
+        return res.json({
+            message:"Updated",
+            updatedProduct
+        })
+    }
     
 }

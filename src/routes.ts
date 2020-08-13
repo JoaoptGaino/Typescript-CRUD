@@ -12,6 +12,7 @@ routes.get('/products',productsController.index);
 routes.get('/products/:id',productsController.show);
 routes.post('/products',productsController.create);
 routes.delete('/products/:id',productsController.remove);
+routes.put('/products/:id',productsController.update);
 
 
 export default routes;
