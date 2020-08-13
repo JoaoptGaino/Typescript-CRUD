@@ -9,16 +9,13 @@ export default class ProductsController{
 
         return res.json(products);
     }
-    
     async create(req:Request,res:Response){
         const{
             name,
             price
         } = req.body;
         const trx = await db.transaction();
-
         try{
-            
             await trx('products').insert(
                 {
                     name,
@@ -34,8 +31,17 @@ export default class ProductsController{
             })
             console.log(err)
         }
+    }
+    async show(req:Request,res:Response){
+        const {id} = req.params;
+        const products = await db('products').where('id',id).first();
 
-
+        if(!products){
+            return res.status(400).json({
+                message:"Error finding product"
+            })
+        }
+        return res.json(products);
     }
     
 }
